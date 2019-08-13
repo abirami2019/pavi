@@ -1,0 +1,523 @@
+BuyKart:
+
+
+dashboard:
+html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>BuyKart Website</h1>
+  <p>Hi,welcome to BuyKart Website</p> 
+</div>
+  
+<div class="container">
+  <div class="row">
+    
+    <div class="col-sm-4">
+      <h3>Plastics</h3>
+      <p>We have plenty of plastic items with good quality</p>
+      <p>There are items with wonderful colors,sizes with wow price!To view <b (click)="alert()">click here</b></p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Metals</h3>
+      <p>We have plenty of plastic items with good quality</p>
+      <p>There are items with wonderful colors,sizes with wow price!To view <b (click)="alert()">click here</b></p>
+    </div>
+    <div class="col-sm-4">
+      <h3>TupperWare</h3>        
+      <p>We have plenty of plastic items with good quality</p>
+      <p>There are items with wonderful colors,sizes with wow price!To view <b (click)="alert()">click here</b></p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+ts:
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
+})
+export class DashboardComponent implements OnInit {
+  alert()
+  {
+  alert("Please register to view more details!");
+  }
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+
+
+editform:
+
+css:
+#edit
+{
+    font-size: 15px;
+}
+#submit
+{
+    margin-left: 500px;
+}
+#register
+{
+    margin-left: 10px;
+}
+html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Bootstrap Example</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<base href="/">
+<div id="edit">
+<div class="jumbotron">
+<div class="container">
+<form #tdf="ngForm">
+<div class="form-group">
+  <label for="name">Name:</label>
+<input type="text" class="form-control" [ngModel]="UserModel.name" name="name" id="name">
+</div>
+<div class="form-group">
+  <label for="email">Email address:</label>
+  <input type="email" class="form-control" id="email" [ngModel]="UserModel.email" name="email">
+</div>
+<div class="form-group">
+  <label for="phone">PhoneNumber:</label> 
+  <input type="mobilenumber" class="form-control" id="Number" [ngModel]="UserModel.phone" name="phone">
+</div>
+<div class="form-group">
+  <label for="address" >Address:</label>
+  <textarea type="address" id="address" rows="5" class="form-control" [ngModel]="UserModel.address" name="address"></textarea>
+</div>
+<div class="form-group">
+  <label for="Interest">Interest:
+    <select class="form-control" [ngModel]="UserModel.Interest" name="Interest" value="ngModel">
+      <option *ngFor="let Interest of Interests">{{Interest}}</option>
+    </select>
+  </label>
+</div>
+<div class="checkbox">
+    <label for="subscribe">
+      <input type="checkbox" [ngModel]="UserModel.subscribe" name="subscribe">
+  Check it for Subscribe!</label>
+</div>
+
+<label for="rating">Yeah!This is for Rating:</label><br/>
+<label class="radio-inline">
+  <input type="radio" name="rating" [ngModel]="UserModel.rating" value="Good">Good
+</label>
+<label class="radio-inline">
+  <input type="radio" name="rating" [ngModel]="UserModel.rating" value="Moderate">Moderate
+</label>
+<label class="radio-inline">
+  <input type="radio" name="rating" [ngModel]="UserModel.rating" value="Bad">Bad
+</label><br/><br/>
+<button class="btn btn-primary btn-lg" id="submit" [routerLink]="['/list']">Submit</button>
+<button class="btn btn-primary btn-lg" id="register" [routerLink]="['/register']">NewRegister</button>
+</form>
+</div>
+</div>
+
+<hr/>
+{{tdf.value | json}}
+<hr/>
+{{UserModel | json}} <!-- This value does not change because its form class-->
+<router-outlet></router-outlet>
+<!-- value in radio is for setting which value to the user -->
+<!-- form-group is for alignment and form-control is for 100% extension of the text boxes -->
+<!-- *ngFor like for loop -->
+<!-- radio-inline for aligining in single line -->
+</div>
+</body>
+</html>
+ts:
+import { Component, OnInit } from '@angular/core';
+import { User } from '../user';
+
+@Component({
+  selector: 'app-editform',
+  templateUrl: './editform.component.html',
+  styleUrls: ['./editform.component.css']
+})
+export class EditFormComponent implements OnInit {
+
+  constructor() { }
+  public Interests=['Sleeping','Writing','Reading'];
+  UserModel = new User('pavithra','pavi@gmail.com',9003597836,'sankari',' ',true,'Good');
+  ngOnInit() {  
+  }
+}
+
+list:
+html:
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<div class="jumbotron">
+    <div class="container">
+<ul class="list-group">
+        <li class="badge badge-light" *ngFor="let List of Lists;index as productid">
+    
+                <a [routerLink]="['listdetails',productid]">{{List.name}}</a></li>
+        
+    </ul>
+</div></div>
+<router-outlet></router-outlet>
+
+<!-- <ol>
+    <li *ngFor="let List of Lists;index as productid">
+    
+    <a [routerLink]="['Listdetails',productid]">{{List}}</a>
+    </li>
+</ol> -->
+
+css:
+.badge
+{
+    padding:10px;
+    margin-left:500px;
+    margin-top:10px;
+    font-size: 20px;
+    color:black;
+    width:200px;
+}
+ts:
+import { Component, OnInit } from '@angular/core';
+import { KartService } from '../kart.service';
+
+@Component({
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css']
+})
+export class ListComponent implements OnInit {
+  /* Lists=['Bottle','Tiffenbox','Stationery','HostelThings','Utensils','Buckets','FlowerPots','PlasticDoors','Cardboard','Mica']; */
+  public Lists=[];
+  constructor(private _Kartservice:KartService) {}
+ 
+  ngOnInit() {
+    this.Lists=this._Kartservice.getDetails()
+  }
+
+}
+
+listdetails:
+html:
+<div [ngSwitch]="List">
+    {{productid}}
+        <div *ngSwitchCase="'Bottle'">{{List.name}}</div>
+        <div *ngSwitchCase="'Tiffenbox'">{{List.name}}</div>
+        <div *ngSwitchCase="''">{{List.name}}</div>
+        <div *ngSwitchCase=3>{{List.name}}</div>
+        <div *ngSwitchCase=4>{{List.name}}</div>
+        <div *ngSwitchCase=5>{{List.name}}</div>
+        <div *ngSwitchCase=6>{{List.name}}</div>
+        <div *ngSwitchCase=7>{{List.name}}</div>
+        <div *ngSwitchCase=8>{{List.name}}</div>
+        <div *ngSwitchCase=9>{{List.name}}</div>
+        <div *ngSwitchDefault>wrong choice</div>
+      </div>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus adipisci nobis sint, aperiam consequuntur asperiores consectetur ab est optio temporibus cumque doloremque atque iusto rem quo repellendus laboriosam corrupti. Saepe nemo quia recusandae. Accusamus saepe neque consequuntur a asperiores, ea quod magnam quaerat quam aperiam vel, deserunt temporibus quo vero facilis, eius modi sed placeat quos error? Modi, sunt. Nulla impedit, incidunt, ratione, libero suscipit labore necessitatibus excepturi debitis sequi aspernatur distinctio aperiam earum perferendis consectetur atque. Et, perspiciatis doloribus!
+    <router-outlet></router-outlet>
+
+ts:
+
+import { Component, OnInit } from '@angular/core';
+import { KartService } from '../kart.service';
+
+@Component({
+  selector: 'app-listdetails',
+  templateUrl: './listdetails.component.html',
+  styleUrls: ['./listdetails.component.css']
+})
+export class ListdetailsComponent implements OnInit {
+  public Lists=[];
+  constructor(private _kartservice:KartService) {}
+
+  ngOnInit() {
+    this.Lists=this._kartservice.getDetails();
+  }
+
+}
+
+pageerror:
+
+html:
+default------------------
+
+register:
+html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Bootstrap Example</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<base href="/">
+<div id="register">
+<div class="jumbotron">
+    <div class="container">
+<form #tdf="ngForm">
+<div class="form-group">
+  <label for="name">Name:</label>
+<input type="text" class="form-control" [(ngModel)]="name" name="name" id="name">
+</div>
+<div class="form-group">
+  <label for="email">Email address:</label>
+  <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email">
+</div>
+<div class="form-group">
+  <label for="phone">PhoneNumber:</label> 
+  <input type="mobilenumber" class="form-control" id="Number" [(ngModel)]="phone" name="phone">
+</div>
+<div class="form-group">
+  <label for="address" >Address:</label>
+  <textarea type="address" id="address" rows="5" class="form-control" [(ngModel)]="address" name="address"></textarea>
+</div>
+<div class="form-group">
+  <label for="interest">Interest:
+    <select class="form-control" [(ngModel)]="interest" name="interest" >
+      <option *ngFor="let interest of interests">{{interest}}</option>
+    </select>
+  </label>
+</div>
+<div class="checkbox">
+    <label for="subcribe"><input type="checkbox" [(ngModel)]="subcribe" name="subcribe" >
+  Check it for Subscribe!</label>
+</div>
+<label for="rating">Yeah!This is for Rating:</label><br/>
+<label class="radio-inline">
+  <input type="radio" name="rating" [(ngModel)]="Good" value="Good">Good
+</label>
+<label class="radio-inline">
+  <input type="radio" name="rating" [(ngModel)]="Moderate" value="Moderate" >Moderate
+</label>
+<label class="radio-inline">
+  <input type="radio" name="rating" [(ngModel)]="Bad" value="Bad">Bad
+</label><br/>
+<button class="btn btn-primary btn-lg" id="submit" [routerLink]="['/list']">Submit</button>
+<button class="btn btn-primary btn-lg" id="edit" [routerLink]="['/edit']">Edit</button>
+</form>
+</div>
+</div>
+{{tdf.value | json}}
+
+<!-- value in radio is for setting which value to the user -->
+<!-- form-group is for alignment and form-control is for 100% extension of the text boxes -->
+<!-- *ngFor like for loop -->
+<!-- radio-inline for aligining in single line -->
+
+</div>
+</body>
+</html>
+css:
+#register
+{
+    font-size: 15px;
+}
+#submit
+{
+    margin-left: 500px;
+}
+#edit
+{
+    margin-left: 10px;
+}
+ts:
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
+})
+export class RegisterComponent implements OnInit {
+
+  constructor() { }
+  public interests=['Sleeping','Writing','Reading'];
+  
+  ngOnInit() {
+  }
+}
+
+app.routing.ts:
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { RegisterComponent } from './register/register.component';
+import { EditFormComponent } from './editform/editform.component';
+import { ListComponent } from './list/list.component';
+import { ListdetailsComponent } from './listdetails/listdetails.component';
+import { PageerrorComponent } from './pageerror/pageerror.component';
+
+
+
+const routes: Routes = [{path:'',redirectTo:'dashboard',pathMatch:'full'},  
+{path:'dashboard',component:DashboardComponent},
+{path:'edit',component:EditFormComponent},
+{path:'register',component:RegisterComponent},
+{path:'list',component:ListComponent, children:[
+  {path:'listdetails/:productid', component:ListdetailsComponent}]},
+{ path: '**', component: PageerrorComponent}
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes),RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+app.component.css
+
+
+.navbar
+{
+    font-size: 20px;
+}
+
+app.component.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">BUY KART</a>
+      </div>
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/register']">Register</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/edit']">Edit</a>
+    </li>
+  </ul>
+  <!-- <div>
+      <a href="#" class="glyphicon glyphicon-user" id="icon"></a>
+  </div> -->
+</nav>
+<br>
+
+<div class="container-fluid">
+  
+</div>
+
+</body>
+</html>
+<router-outlet></router-outlet>
+
+app.module.ts
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
+import { EditFormComponent } from './editform/editform.component';
+import { RegisterComponent } from './register/register.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { PageerrorComponent } from './pageerror/pageerror.component';
+import { ListComponent } from './list/list.component';
+import { KartService } from './kart.service';
+import { ListdetailsComponent } from './listdetails/listdetails.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    EditFormComponent,
+    RegisterComponent,
+    DashboardComponent,
+    PageerrorComponent,
+    ListComponent,
+    ListdetailsComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule
+  ],
+  providers: [KartService],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+kart.service.ts
+
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class KartService {
+
+  constructor() {}
+    getDetails()
+    {
+      return[{"id":0,"name":"Bottle","price":"150","offer":"10%"},
+      {"id":1,"name":"Tiffenbox","price":"350","offer":"15%"},
+      {"id":2,"name":"Stationery","price":"50","offer":"10%"},
+      {"id":3,"name":"HostelThings","price":"500","offer":"20%"},
+      {"id":4,"name":"Utensils","price":"300","offer":"10%"},
+      {"id":5,"name":"Buckets","price":"70","offer":"5%"},
+      {"id":6,"name":"FlowerPots","price":"170","offer":"10%"},
+      {"id":7,"name":"PlasticDoors","price":"560","offer":"5%"},
+      {"id":8,"name":"Cardboard","price":"700","offer":"25%"},
+      {"id":9,"name":"Mica","price":"300","offer":"15%"}  
+    ]
+    }
+   
+}
+
+User.ts:
+export class User {
+    constructor(
+        public name : String,
+        public email : String,
+        public phone : number,
+        public address : String,
+        public Interest : String,
+        public subscribe : boolean,
+        public rating : String
+        ){}
+}
